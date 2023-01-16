@@ -1,0 +1,41 @@
+---
+title: 'Peer-graded Assignment: R Markdown Presentation & Plotly'
+author: "S Ridgway"
+date: "`r Sys.Date()`"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+## Introduction
+
+
+As part of this weeks course project, i have to create this web page presentation using R Markdown, which features a plot created with Plotly.
+
+As part of this HTML hosted presentation, the webpage must feature a date less than two months before the date it is graded and it must also feature an interactive plot that has been created with Plotly.
+
+On the next slide you will see the plot created in plotly based on the popular mtcars dataset. The R Markdown file(code) for this plot can be found in my Github Repository here.
+
+## Plotly - 3D Scatter Plot
+
+
+Below is my final output for this project. This is a 3D Scatter Plot created with Plotly and displays the relationships for the three variables, Weight, Horsepower and Miles Per Gallon against each Car Type (Automatic or Manual).
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE, fig.align='right'}
+library(plotly)
+
+mtcars$am[which(mtcars$am == 0)] <- 'Automatic'
+mtcars$am[which(mtcars$am == 1)] <- 'Manual'
+mtcars$am <- as.factor(mtcars$am)
+
+fig <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~mpg, color = ~am, colors = c('#b800e6', '#ff8000'))
+fig <- fig %>% add_markers()
+fig <- fig %>% layout(scene = list(xaxis = list(title = 'Car Weight'),
+                     yaxis = list(title = 'Horsepower'),
+                     zaxis = list(title = 'Miles Per Gallon')))
+
+fig
+```
+
+
